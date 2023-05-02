@@ -13,11 +13,13 @@ public:
 	float ypos;
 	int hp;
 
-	player(int x, int y);
+	player(float x, float y);
 	void draw(sf::RenderWindow& window);
 	void move(bool* keys);
 	float returnX() { return xpos; }
 	float returnY() { return ypos; }
+	void shoot(bool* keys, sf::RenderWindow& window);
+	void collide(float x, float y, bool* keys);
 	void died(int hp);
 	void printInfo() { cout << "My position is " << xpos << ", " << ypos << endl; }
 };

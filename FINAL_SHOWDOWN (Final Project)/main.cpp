@@ -9,10 +9,10 @@ using namespace std;
 int main() {
 	srand(time(NULL));
 	int timer = 0;
-	sf::RenderWindow screen(sf::VideoMode(1000, 1000), "FINAL_SHOWDOWN!");
-	bool p1keys[] = { false, false, false, false };
-	bool p2keys[] = { false, false, false, false };
-	player p1(900, 400);
+	sf::RenderWindow screen(sf::VideoMode(1920, 1020), "FINAL_SHOWDOWN!");
+	bool p1keys[] = { false, false, false, false, false };
+	bool p2keys[] = { false, false, false, false, false };
+	player p1(1520, 400);
 	player p2(100, 400);
 
 	while (screen.isOpen()) { //gameloop
@@ -58,10 +58,26 @@ int main() {
 				p2keys[A] = false;
 				p2keys[D] = false;
 			}
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::RShift)) {
+				p1keys[SHIFT] = true;
+				p1.shoot(p1keys, screen);
+			}
+			else {
+				p1keys[SHIFT] = false;
+			}
+
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
+				p2keys[SPACE] = true;
+				p1.shoot(p1keys, screen);
+			}
+			else {
+				p2keys[SPACE] = false;
+			}
 
 		}
 
 		//physics section
+
 		p1.move(p1keys);
 		p2.move(p2keys);
 
