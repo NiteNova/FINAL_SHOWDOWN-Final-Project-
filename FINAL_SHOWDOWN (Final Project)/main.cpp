@@ -12,8 +12,8 @@ int main() {
 	sf::RenderWindow screen(sf::VideoMode(1000, 1000), "FINAL_SHOWDOWN!");
 	bool p1keys[] = { false, false, false, false };
 	bool p2keys[] = { false, false, false, false };
-	player p1(100, 400);
-	player p2(900, 400);
+	player p1(900, 400);
+	player p2(100, 400);
 
 	while (screen.isOpen()) { //gameloop
 		//keyboard input
@@ -29,13 +29,9 @@ int main() {
 			}
 			else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
 				p1keys[LEFT] = true;
-				p1keys[DOWN] = false;
-				p1keys[UP] = false;
 			}
 			else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
 				p1keys[RIGHT] = true;
-				p1keys[DOWN] = false;
-				p1keys[UP] = false;
 			}
 			else {
 				p1keys[UP] = false;
@@ -52,13 +48,9 @@ int main() {
 			}
 			else if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
 				p2keys[A] = true;
-				p2keys[S] = false;
-				p2keys[W] = false;
 			}
 			else if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
 				p2keys[D] = true;
-				p2keys[S] = false;
-				p2keys[W] = false;
 			}
 			else {
 				p2keys[W] = false;
