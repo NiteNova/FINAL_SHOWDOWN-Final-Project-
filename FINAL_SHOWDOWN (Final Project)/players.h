@@ -18,8 +18,7 @@ public:
 	void move(bool* keys);
 	float returnX() { return xpos; }
 	float returnY() { return ypos; }
-	void shoot(bool* keys, sf::RenderWindow& window);
-	void collide(float x, float y, bool* keys);
+	void collide(float x, float y);
 	void died(int hp);
 	void printInfo() { cout << "My position is " << xpos << ", " << ypos << endl; }
 };

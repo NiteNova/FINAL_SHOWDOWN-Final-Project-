@@ -4,16 +4,19 @@
 #include <time.h>
 #include "globals.h"
 #include "players.h"
+#include "bullet.h"
 using namespace std;
 
 int main() {
 	srand(time(NULL));
 	int timer = 0;
-	sf::RenderWindow screen(sf::VideoMode(1920, 1020), "FINAL_SHOWDOWN!");
+	sf::RenderWindow screen(sf::VideoMode(1800, 900), "FINAL_SHOWDOWN!");
 	bool p1keys[] = { false, false, false, false, false };
 	bool p2keys[] = { false, false, false, false, false };
-	player p1(1520, 400);
+	player p1(1630, 400);
 	player p2(100, 400);
+	bullet b1(p1.xpos - 10, p1.ypos + 40);
+
 
 	while (screen.isOpen()) { //gameloop
 		//keyboard input
@@ -21,6 +24,7 @@ int main() {
 		while (screen.pollEvent(event)) { 
 			if (event.type == sf::Event::Closed)
 				screen.close();
+		//player 1 (Arrow keys)
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
 				p1keys[UP] = true;
 			}
@@ -39,7 +43,7 @@ int main() {
 				p1keys[LEFT] = false;
 				p1keys[RIGHT] = false;
 			}
-		
+		//player 2 (WASD)
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
 				p2keys[W] = true;
 			}
@@ -58,31 +62,39 @@ int main() {
 				p2keys[A] = false;
 				p2keys[D] = false;
 			}
+
+		//shooting inputs
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::RShift)) {
-				p1keys[SHIFT] = true;
-				p1.shoot(p1keys, screen);
+				//p1keys[SHIFT] = true;
+				b1.isAlive = true;
 			}
-			else {
-				p1keys[SHIFT] = false;
-			}
+			
 
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
 				p2keys[SPACE] = true;
-				p1.shoot(p1keys, screen);
 			}
-			else {
-				p2keys[SPACE] = false;
-			}
+			
 
 		}
 
 		//physics section
-
+		
+			//player movement
 		p1.move(p1keys);
 		p2.move(p2keys);
+			//bullet movement
+		b1.move(-0.3);
+
+			//bullet collision
+		b1.collide(p2.xpos, p2.ypos);
+
+			//player collision 
+		p1.collide(p1.xpos, p1.ypos);
+		p2.collide(p2.xpos, p2.ypos);
 
 		//render section
 		screen.clear();
+		b1.draw(screen);
 
 		p1.draw(screen);
 		p2.draw(screen);
