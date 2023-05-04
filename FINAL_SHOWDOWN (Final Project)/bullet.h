@@ -11,7 +11,7 @@ public:
 	bool isAlive = false;
 	bullet(float x, float y);
 	void draw(sf::RenderWindow& window);
-	void move(float x);
+	void move(float x, float px, float py);
 	int collide(float x, float y);
 	void printInfo() { cout << "My xpos is" << xpos << " . My ypos is" << ypos << endl; }
 };

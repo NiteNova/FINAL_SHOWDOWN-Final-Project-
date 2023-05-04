@@ -83,21 +83,23 @@ int main() {
 		p1.move(p1keys);
 		p2.move(p2keys);
 			//bullet movement
-		b1.move(-0.3);
+		b1.move(-0.3, p1.xpos - 10, p1.ypos + 30);
 
 			//bullet collision
-		b1.collide(p2.xpos, p2.ypos);
+		p2.hp += (b1.collide(p2.xpos, p2.ypos));
 
-			//player collision 
+			//player collision with the walls
 		p1.collide(p1.xpos, p1.ypos);
 		p2.collide(p2.xpos, p2.ypos);
 
 		//render section
 		screen.clear();
 		b1.draw(screen);
-
+			
+			//player drawings 
 		p1.draw(screen);
 		p2.draw(screen);
+		//end of render section 
 
 		screen.display();
 	}
