@@ -14,11 +14,11 @@ public:
 	int hp;
 
 	player(float x, float y);
-	void draw(sf::RenderWindow& window);
+	void draw(sf::RenderWindow& window, int healthx, int healthy);
 	void move(bool* keys);
 	float returnX() { return xpos; }
 	float returnY() { return ypos; }
 	void collide(float x, float y);
-	void died(int hp);
+	void died();
 	void printInfo() { cout << "My position is " << xpos << ", " << ypos << endl; }
 };

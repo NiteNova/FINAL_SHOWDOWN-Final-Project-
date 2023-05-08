@@ -33,10 +33,11 @@ int bullet::collide(float x, float y) {
 			isAlive = false;
 			cout << "Bullet died" << endl;
 		}
-		if (xpos <= x+70 and xpos >= x and ypos >= y and ypos <= y+70) {
+		if (xpos <= x + 70 and xpos >= x and ypos >= y and ypos <= y + 70) {
 			isAlive = false;
 			cout << "Bullet hit player" << endl;
 			return -20;
 		}
 	}
+	return 0;
 }
