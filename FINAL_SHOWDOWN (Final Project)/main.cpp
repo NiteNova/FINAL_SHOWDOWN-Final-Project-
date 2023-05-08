@@ -74,17 +74,24 @@ int main() {
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::RShift)) {
 				p1keys[SHIFT] = true;
 			}
+<<<<<<< HEAD
 			else {
 				p1keys[SHIFT] = false;
 			}
+=======
+>>>>>>> refs/remotes/origin/master
 
 
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
 				p2keys[SPACE] = true;
 			}
+<<<<<<< HEAD
 			else {
 				p2keys[SPACE] = false;
 			}
+=======
+
+>>>>>>> refs/remotes/origin/master
 
 		}
 
@@ -103,6 +110,7 @@ int main() {
 			//player movement
 		p1.move(p1keys);
 		p2.move(p2keys);
+<<<<<<< HEAD
 			//bullet movement
 
 			//bullet collision
@@ -116,13 +124,21 @@ int main() {
 			((*iter)->move(-0.5, p1.xpos - 10, p1.ypos + 30));
 		}
 
+=======
+		//bullet movement
+		b1.move(-0.3, p1.xpos - 10, p1.ypos + 30);
 
-			//player collision with the walls
+		//bullet collision
+		p2.hp += (b1.collide(p2.xpos, p2.ypos));
+>>>>>>> refs/remotes/origin/master
+
+		//player collision with the walls
 		p1.collide(p1.xpos, p1.ypos);
 		p2.collide(p2.xpos, p2.ypos);
 
 		//render section
 		screen.clear();
+<<<<<<< HEAD
 
 			//bullet drawings
 		for (iter = p1bullets.begin(); iter != p1bullets.end(); iter++) {
@@ -132,6 +148,11 @@ int main() {
 		}
 
 			//player drawings 
+=======
+		b1.draw(screen);
+
+		//player drawings 
+>>>>>>> refs/remotes/origin/master
 		p1.draw(screen, 1600, 50);
 		p2.draw(screen, 100, 50);
 		//end of render section 
