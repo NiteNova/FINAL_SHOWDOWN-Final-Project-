@@ -13,5 +13,7 @@ public:
 	void draw(sf::RenderWindow& window);
 	void move(float x, float px, float py);
 	int collide(float x, float y);
+	bool CheckisAlive();
+	void shoot();
 	void printInfo() { cout << "My xpos is" << xpos << " . My ypos is" << ypos << endl; }
 };
