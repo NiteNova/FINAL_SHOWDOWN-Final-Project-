@@ -19,10 +19,19 @@ int main() {
 	vector<bullet*> p1bullets;
 	vector<bullet*> ::iterator iter;
 
+	vector<bullet*> p2bullets;
+	vector<bullet*> ::iterator iter2;
+
 	int justShot = 0;
 	for (int i = 0; i < 10; i++) {
 		bullet* newBullet = new bullet(p1.xpos - 10, p1.ypos + 40);
 		p1bullets.push_back(newBullet);
+	}
+
+	int justShot2 = 0;
+	for (int g = 0; g < 10; g++) {
+		bullet* newBullet = new bullet(p2.xpos, p2.ypos);
+		p2bullets.push_back(newBullet);
 	}
 
 	while (screen.isOpen()) { //gameloop
@@ -88,9 +97,19 @@ int main() {
 		justShot++;
 		if (p1keys[SHIFT] == true) {
 			for (iter = p1bullets.begin(); iter != p1bullets.end(); iter++) {
-				if (((*iter)->CheckisAlive()) == false && justShot > 3) {
+				if (((*iter)->CheckisAlive()) == false && justShot > 500) {
 					(*iter)->shoot();
 					justShot = 0;
+				}
+			}
+		}
+
+		justShot2++;
+		if (p2keys[SPACE] == true) {
+			for (iter2 = p2bullets.begin(); iter2 != p2bullets.end(); iter2++) {
+				if (((*iter2)->CheckisAlive()) == false && justShot2 > 500) {
+					(*iter2)->shoot();
+					justShot2 = 0;
 				}
 			}
 		}
@@ -101,25 +120,26 @@ int main() {
 		p1.move(p1keys);
 		p2.move(p2keys);
 
-			//bullet movement
-
-			//bullet collision
+			//bullet collision for player 2
 		for (iter = p1bullets.begin(); iter != p1bullets.end(); iter++) {
-			if ((*iter)->CheckisAlive() == true) {
+			if ((*iter)->CheckisAlive() == true) 
 				p2.hp += ((*iter)->collide(p2.xpos, p2.ypos));
-			}
+		}
+			//bullet collision for player 1
+		for (iter2 = p2bullets.begin(); iter2 != p2bullets.end(); iter2++) {
+			if ((*iter2)->CheckisAlive() == true)
+				p1.hp += ((*iter2)->collide(p1.xpos, p1.ypos));
 		}
 
+			//bullet movement for player 1
 		for (iter = p1bullets.begin(); iter != p1bullets.end(); iter++) {
 			((*iter)->move(-0.5, p1.xpos - 10, p1.ypos + 30));
 		}
-
-
-		//bullet movement
-
-		//bullet collision
-
-
+			//bullet movement for player 2
+		for (iter2 = p2bullets.begin(); iter2 != p2bullets.end(); iter2++) {
+			((*iter2)->move(0.5, p2.xpos+80, p2.ypos+30));
+		}
+	
 		//player collision with the walls
 		p1.collide(p1.xpos, p1.ypos);
 		p2.collide(p2.xpos, p2.ypos);
@@ -127,14 +147,16 @@ int main() {
 		//render section
 		screen.clear();
 
-			//bullet drawings
+			//bullet drawing for player 1
 		for (iter = p1bullets.begin(); iter != p1bullets.end(); iter++) {
-			if ((*iter)->CheckisAlive() == true) {
+			if ((*iter)->CheckisAlive() == true)
 				(*iter)->draw(screen);
-			}
 		}
-
-			//player drawings 
+			//bullet drawing for player 2
+		for (iter2 = p2bullets.begin(); iter2 != p2bullets.end(); iter2++) {
+			if ((*iter2)->CheckisAlive() == true)
+				(*iter2)->draw(screen);
+		}
 
 
 		//player drawings 
@@ -145,6 +167,6 @@ int main() {
 
 		screen.display();
 	}
-	cout << "GAME OVER" << endl;
+	std::cout << "GAME OVER" << endl;
 	return 0;
 }
