@@ -44,11 +44,8 @@ int bullet::collide(float x, float y) {
 		}
 	}
 	return 0;
-<<<<<<< HEAD
 }
 
 bool bullet::CheckisAlive() {
 	return isAlive;
-=======
->>>>>>> refs/remotes/origin/master
 }
