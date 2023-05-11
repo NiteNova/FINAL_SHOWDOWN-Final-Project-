@@ -150,15 +150,20 @@ int main() {
 		}
 	
 			//wall collision with player 1 bullets
-		for (walliter = walls.begin(); walliter != walls.end(); walliter) {
+		for (walliter = walls.begin(); walliter != walls.end(); walliter++) {
 			for (iter = p1bullets.begin(); iter != p1bullets.end(); iter++) {
-				((*walliter))->collide((*iter)->xpos, (*iter)->ypos));
+				if ((*walliter)->collide((*iter)->xpos, (*iter)->ypos) == false) {
+					(*iter)->KILL();
+				}
 			}
 		}
+
 			//wall collision with player 2 bullets
-		for (walliter = walls.begin(); walliter != walls.end(); walliter) {
+		for (walliter = walls.begin(); walliter != walls.end(); walliter++) {
 			for (iter2 = p2bullets.begin(); iter2 != p2bullets.end(); iter2++) {
-				((*walliter)->isAlive = ((*walliter))->collide((*iter2)->xpos, (*iter2)->ypos));
+				if ((*walliter)->collide((*iter2)->xpos, (*iter2)->ypos) == false) {
+					(*iter2)->KILL();
+				}
 			}
 		}
 

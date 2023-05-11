@@ -66,3 +66,10 @@ void player::collide(float x, float y) {
 	if (y < 0)
 		ypos = 0;
 }
+
+void player::wallcollide(float x, float y, int wx, int wy) {
+	if (x <= wx and x + 20 >= wx and y + 200 >= wy and y <= wy) {
+		xpos = wx;
+		ypos = wy;
+	}
+}

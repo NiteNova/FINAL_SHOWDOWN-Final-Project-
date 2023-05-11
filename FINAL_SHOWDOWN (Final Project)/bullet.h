@@ -15,5 +15,6 @@ public:
 	int collide(float x, float y);
 	bool CheckisAlive();
 	void shoot();
+	void KILL();
 	void printInfo() { cout << "My xpos is" << xpos << " . My ypos is" << ypos << endl; }
 };

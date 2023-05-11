@@ -19,6 +19,7 @@ public:
 	float returnX() { return xpos; }
 	float returnY() { return ypos; }
 	void collide(float x, float y);
+	void wallcollide(float x, float y, int wx, int wy);
 	void died();
 	void printInfo() { cout << "My position is " << xpos << ", " << ypos << endl; }
 };

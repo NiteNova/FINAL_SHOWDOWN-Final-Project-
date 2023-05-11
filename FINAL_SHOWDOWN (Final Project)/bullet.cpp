@@ -49,3 +49,7 @@ int bullet::collide(float x, float y) {
 bool bullet::CheckisAlive() {
 	return isAlive;
 }
+
+void bullet::KILL() {
+	isAlive = false;
+}

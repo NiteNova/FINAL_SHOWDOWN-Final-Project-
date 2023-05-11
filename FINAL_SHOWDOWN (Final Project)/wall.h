@@ -11,7 +11,7 @@ public:
 	bool isAlive;
 	wall(int x, int y, int h);
 	void draw(sf::RenderWindow& window, int x, int y);
-	void collide(int x, int y);
+	bool collide(int x, int y);
 	bool CheckisAlive();
 	void printInfo() { cout << "My xpos is" << xpos << " . My ypos is" << ypos << endl; }
 };

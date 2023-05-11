@@ -16,15 +16,17 @@ void wall::draw(sf::RenderWindow& window, int x, int y) {
 	}
 }
 
-void wall::collide(int x, int y) {
+bool wall::collide(int x, int y) {
 	if (isAlive == true) {
-		if (xpos <= x + 50 and xpos >= x and ypos >= y and ypos <= y + 100 and hp > 0) {
+		if (xpos <= x and xpos+20 >= x and ypos+200 >= y and ypos <= y and hp > 0) {
 			cout << "Bullet hit a wall" << endl;
-			hp -= 20;
-			isAlive = true;
+			hp -= 3;
+			return false;
 		}
 	}
-	isAlive = false;
+	else {
+		return true;
+	}
 }
 
 bool wall::CheckisAlive() {
