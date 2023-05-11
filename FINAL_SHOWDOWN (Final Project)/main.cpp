@@ -5,6 +5,7 @@
 #include "globals.h"
 #include "players.h"
 #include "bullet.h"
+#include "wall.h"
 using namespace std;
 
 int main() {
@@ -15,6 +16,9 @@ int main() {
 	bool p2keys[] = { false, false, false, false, false };
 	player p1(1630, 400);
 	player p2(100, 400);
+
+	vector<wall*> walls;
+	vector<wall*> ::iterator walliter;
 
 	vector<bullet*> p1bullets;
 	vector<bullet*> ::iterator iter;
@@ -32,6 +36,11 @@ int main() {
 	for (int g = 0; g < 10; g++) {
 		bullet* newBullet = new bullet(p2.xpos, p2.ypos);
 		p2bullets.push_back(newBullet);
+	}
+
+	for (int j = 0; j < 2; j++) {
+		wall* newWall = new wall(250, 150 + j*400, 100);
+		walls.push_back(newWall);
 	}
 
 	while (screen.isOpen()) { //gameloop
@@ -140,7 +149,20 @@ int main() {
 			((*iter2)->move(0.5, p2.xpos+80, p2.ypos+30));
 		}
 	
-		//player collision with the walls
+			//wall collision with player 1 bullets
+		for (walliter = walls.begin(); walliter != walls.end(); walliter) {
+			for (iter = p1bullets.begin(); iter != p1bullets.end(); iter++) {
+				((*walliter))->collide((*iter)->xpos, (*iter)->ypos));
+			}
+		}
+			//wall collision with player 2 bullets
+		for (walliter = walls.begin(); walliter != walls.end(); walliter) {
+			for (iter2 = p2bullets.begin(); iter2 != p2bullets.end(); iter2++) {
+				((*walliter)->isAlive = ((*walliter))->collide((*iter2)->xpos, (*iter2)->ypos));
+			}
+		}
+
+			//player collision with the window of screen
 		p1.collide(p1.xpos, p1.ypos);
 		p2.collide(p2.xpos, p2.ypos);
 
@@ -156,6 +178,11 @@ int main() {
 		for (iter2 = p2bullets.begin(); iter2 != p2bullets.end(); iter2++) {
 			if ((*iter2)->CheckisAlive() == true)
 				(*iter2)->draw(screen);
+		}
+
+		for (walliter = walls.begin(); walliter != walls.end(); walliter++) {
+			if ((*walliter)->CheckisAlive() == true)
+				(*walliter)->draw(screen, 20, 200);
 		}
 
 
