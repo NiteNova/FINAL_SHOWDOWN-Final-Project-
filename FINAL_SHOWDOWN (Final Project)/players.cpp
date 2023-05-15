@@ -68,8 +68,11 @@ void player::collide(float x, float y) {
 }
 
 void player::wallcollide(float x, float y, int wx, int wy) {
-	if (x <= wx and x + 20 >= wx and y + 200 >= wy and y <= wy) {
-		xpos = wx;
-		ypos = wy;
-	}
+	if (x+70 > wx and x < wx + 20 and y+70 > wy and y < wy + 200) 
+		xpos = wx + 20;
+	if (x + 70 > wx and x < wx and y + 70 > wy and y < wy + 200)
+		xpos = wx - 70;
 }
+// 70 x 70 player
+// wall xpos: 20
+// wall ypos: 200

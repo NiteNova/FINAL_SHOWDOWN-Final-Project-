@@ -152,21 +152,31 @@ int main() {
 			//wall collision with player 1 bullets
 		for (walliter = walls.begin(); walliter != walls.end(); walliter++) {
 			for (iter = p1bullets.begin(); iter != p1bullets.end(); iter++) {
-				if ((*walliter)->collide((*iter)->xpos, (*iter)->ypos) == false) {
-					(*iter)->KILL();
+				if ((*iter)->isAlive == true) {
+					if ((*walliter)->collide((*iter)->xpos, (*iter)->ypos) == false) {
+						(*iter)->KILL();
+					}
 				}
 			}
 		}
-
 			//wall collision with player 2 bullets
 		for (walliter = walls.begin(); walliter != walls.end(); walliter++) {
 			for (iter2 = p2bullets.begin(); iter2 != p2bullets.end(); iter2++) {
-				if ((*walliter)->collide((*iter2)->xpos, (*iter2)->ypos) == false) {
-					(*iter2)->KILL();
+				if ((*iter2)->isAlive == true) {
+					if ((*walliter)->collide((*iter)->xpos, (*iter)->ypos) == false) {
+						(*iter2)->KILL();
+					}
 				}
 			}
 		}
-
+			//wall collision with player 1 body
+		for (walliter = walls.begin(); walliter != walls.end(); walliter++) {
+			p1.wallcollide(p1.xpos, p1.ypos, (*walliter)->xpos, (*walliter)->ypos);
+		}
+			//wall collision with player 2 body
+		for (walliter = walls.begin(); walliter != walls.end(); walliter++) {
+			p2.wallcollide(p2.xpos, p2.ypos, (*walliter)->xpos, (*walliter)->ypos);
+		}
 			//player collision with the window of screen
 		p1.collide(p1.xpos, p1.ypos);
 		p2.collide(p2.xpos, p2.ypos);
@@ -184,7 +194,7 @@ int main() {
 			if ((*iter2)->CheckisAlive() == true)
 				(*iter2)->draw(screen);
 		}
-
+			//wall drawing
 		for (walliter = walls.begin(); walliter != walls.end(); walliter++) {
 			if ((*walliter)->CheckisAlive() == true)
 				(*walliter)->draw(screen, 20, 200);
