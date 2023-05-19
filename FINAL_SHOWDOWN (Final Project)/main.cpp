@@ -43,6 +43,11 @@ int main() {
 		walls.push_back(newWall);
 	}
 
+	for (int p = 0; p < 2; p++) {
+		wall* newWall = new wall(1530, 150 + p * 400, 100);
+		walls.push_back(newWall);
+	}
+
 	while (screen.isOpen()) { //gameloop
 		//keyboard input
 		sf::Event event;
@@ -163,7 +168,7 @@ int main() {
 		for (walliter = walls.begin(); walliter != walls.end(); walliter++) {
 			for (iter2 = p2bullets.begin(); iter2 != p2bullets.end(); iter2++) {
 				if ((*iter2)->isAlive == true) {
-					if ((*walliter)->collide((*iter)->xpos, (*iter)->ypos) == false) {
+					if ((*walliter)->collide((*iter2)->xpos, (*iter2)->ypos) == false) {
 						(*iter2)->KILL();
 					}
 				}
@@ -171,11 +176,15 @@ int main() {
 		}
 			//wall collision with player 1 body
 		for (walliter = walls.begin(); walliter != walls.end(); walliter++) {
-			p1.wallcollide(p1.xpos, p1.ypos, (*walliter)->xpos, (*walliter)->ypos);
+			if ((*walliter)->hp > 0) {
+				p1.wallcollide(p1.xpos, p1.ypos, (*walliter)->xpos, (*walliter)->ypos);
+			}
 		}
 			//wall collision with player 2 body
 		for (walliter = walls.begin(); walliter != walls.end(); walliter++) {
-			p2.wallcollide(p2.xpos, p2.ypos, (*walliter)->xpos, (*walliter)->ypos);
+			if ((*walliter)->hp > 0) {
+				p2.wallcollide(p2.xpos, p2.ypos, (*walliter)->xpos, (*walliter)->ypos);
+			}
 		}
 			//player collision with the window of screen
 		p1.collide(p1.xpos, p1.ypos);
@@ -196,7 +205,7 @@ int main() {
 		}
 			//wall drawing
 		for (walliter = walls.begin(); walliter != walls.end(); walliter++) {
-			if ((*walliter)->CheckisAlive() == true)
+			if ((*walliter)->CheckisAlive() == true and (*walliter)->hp > 0)
 				(*walliter)->draw(screen, 20, 200);
 		}
 
